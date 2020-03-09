@@ -1,0 +1,55 @@
+		INSTRUÇÕES PARA EXECUÇÃO DA APPLICAÇÃO
+
+
+DOWNLOADS NECESSÁRIOS:
+ - Baixar o NodeJS: https://nodejs.org/en/download/
+ - Baixar XAMPP Server: https://www.apachefriends.org/download.html
+
+
+
+ALTERAÇÕES NO XAMPP SERVER:
+ - Iniciar o XAMPP Server na aba "General", e os serviços na aba "Services".
+ - Acessar a aba "Volumes", clicar em "Mount", em seguida em "Explore" e uma janela do Finder abrirá.
+ - Alterar o arquivo "my.cnf" localizado em "/etc/my.cnf". Essa alteração é necessária para permitir a comunicação do XAMPP com o MySQL.
+Obs.: Caso tenha problema nesse passo, tem um video ensinando o passo a passo (https://www.youtube.com/watch?v=P2yS47MxjLM entre 4:50 e 9:10)
+   1) Localizar o texto:
+	# The MySQL server
+	[mysqld]
+	user = mysql
+   2) Inserir a linha "skip-grant-tables" entre "[mysqld]" e "user = mysql" e salvar o arquivo
+   3) O texto final dessa parte ficará:
+	# The MySQL server
+	[mysqld]
+	skip-grant-tables
+	user = mysql
+ - Retornar ao XAMPP, clicar em "Unmount", em seguida ir na aba "Services" e clicar em "Restart All" para reiniciar os serviços
+
+
+
+IMPORTAÇÃO DO BANCO DE DADOS:
+ - No XAMPP, ir na aba "Network" e habilitar o "localhost:8080".
+ - Acessar o endereço "http://localhost:8080/phpmyadmin/" e carregar o banco de dados MySQL disponível no arquivo "db.sql".
+
+
+
+EXECUÇÃO da API:
+*Obs.: A API está configurada com os parâmetros padrão do XAMPP Server:
+ host = 192.168.64.2
+ port = 3306
+ user = root
+ password = '' (vazio)
+*portanto, deve-se certificar que o XAMPP Server está trabalhando com seus parâmetros padrão.
+ - O "host" é o IP exibido no XAMPP na aba "General". Caso o XAMPP esteja exibindo o IP diferente de "192.168.64.2". Acessar o arquivo "index.js" e editar o valor da chave "host" para o valor exibido no XAMPP.
+ - Entrar no terminal, acessar a pasta da API e executar o comando "node index.js"
+
+
+
+EXECUÇÃO do APLICATIVO
+ - Acessar a pasta do aplicativo e executar o arquivo "Academia.xcodeproj"
+ - A aplicação será aberta no Xcode
+ - Selecionar o simulador de iPad 9.7" (é possível rodar em outros tamanhos de tela de iPad também, mas dependendo do tamanho da tela do computador, é possível que o simulador seja maior que o tamanho da tela)
+ - Executar os casos de uso
+
+
+
+
