@@ -528,7 +528,7 @@
                                                 <rect key="frame" x="143" y="0.0" width="350" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="name"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -1835,7 +1835,19 @@
                     <view key="view" contentMode="scaleToFill" id="qaN-Eh-Q7X">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pagina para Pagamentos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E48-Je-L73">
+                                <rect key="frame" x="417.5" y="358.5" width="189.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="E48-Je-L73" firstAttribute="centerY" secondItem="4D5-dF-Uv8" secondAttribute="centerY" id="RtU-La-Acu"/>
+                            <constraint firstItem="E48-Je-L73" firstAttribute="centerX" secondItem="4D5-dF-Uv8" secondAttribute="centerX" id="uZA-aF-n1d"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4D5-dF-Uv8"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Pagamentos" image="payment" id="KbW-F5-eBM"/>
@@ -1851,7 +1863,19 @@
                     <view key="view" contentMode="scaleToFill" id="rzi-xF-MmN">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pagina para Avaliação Física" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIc-wY-X42">
+                                <rect key="frame" x="405" y="358.5" width="214" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dIc-wY-X42" firstAttribute="centerY" secondItem="5CR-7O-jpN" secondAttribute="centerY" id="3Zo-Es-q42"/>
+                            <constraint firstItem="dIc-wY-X42" firstAttribute="centerX" secondItem="5CR-7O-jpN" secondAttribute="centerX" id="OkH-Mh-ZyI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5CR-7O-jpN"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Avaliação Física" image="physicalEvaluation" id="9Qm-iI-SQT"/>
