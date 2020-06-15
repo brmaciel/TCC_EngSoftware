@@ -3,21 +3,18 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 3000; //porta padrão
 const mysql = require('mysql');
-const dbConection = {
-	host     : '192.168.64.2',
-	port     : '3306',
-	user     : 'root',
-	password : '',
-	database : 'academia2'
-};
+const dbConection = require('./db_config');
+
 
 //configurando o body parser para pegar POSTS mais tarde
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const InstutorRoute = require('./routes/instrutor_routes')
+
 //definindo as rotas
 const router = express.Router();
-// Metodos GET
+
 router.get('/', (req, res) => res.json({ message: 'Funcionando!' }));
 
 router.get('/alunos/:comandoSQL?', (req, res) => {
@@ -38,34 +35,34 @@ router.get('/alunos/:comandoSQL?', (req, res) => {
 
 
 // Metodos GET
-router.get('/instrutores/:nomeOrId?', (req, res) => {
-	// quando não é passado um parametro, seleciona todos os instrutores
-	if (req.query.atividade) {
-		console.log(req.query);
-		const atividade = req.query.atividade;
+// router.get('/instrutores/:nomeOrId?', (req, res) => {
+// 	// quando não é passado um parametro, seleciona todos os instrutores
+// 	if (req.query.atividade) {
+// 		console.log(req.query);
+// 		const atividade = req.query.atividade;
 
-		const sqlQuery = "SELECT * FROM instrutor " +
-						 `WHERE atividade = '${atividade}' ` +
-						 "ORDER BY nome;";
-		console.log(sqlQuery);
+// 		const sqlQuery = "SELECT * FROM instrutor " +
+// 						 `WHERE atividade = '${atividade}' ` +
+// 						 "ORDER BY nome;";
+// 		console.log(sqlQuery);
 
-		selectInstrutor(sqlQuery, res);
-	} else if (req.params.nomeOrId) {
-		const searchValue = req.params.nomeOrId;
+// 		selectInstrutor(sqlQuery, res);
+// 	} else if (req.params.nomeOrId) {
+// 		const searchValue = req.params.nomeOrId;
 
-		const sqlQuery = "SELECT * FROM instrutor " + 
-						 `WHERE nome LIKE '%${searchValue}%' OR id_instrutor LIKE '%${searchValue}%' ` +
-						 "ORDER BY nome;";
-		console.log(sqlQuery);
+// 		const sqlQuery = "SELECT * FROM instrutor " + 
+// 						 `WHERE nome LIKE '%${searchValue}%' OR id_instrutor LIKE '%${searchValue}%' ` +
+// 						 "ORDER BY nome;";
+// 		console.log(sqlQuery);
 
-		selectInstrutor(sqlQuery, res);
-	} else {
-		const sqlQuery = "SELECT * FROM instrutor ORDER BY nome;";
-		console.log(sqlQuery);
+// 		selectInstrutor(sqlQuery, res);
+// 	} else {
+// 		const sqlQuery = "SELECT * FROM instrutor ORDER BY nome;";
+// 		console.log(sqlQuery);
 
-		selectInstrutor(sqlQuery, res);
-	}
-});
+// 		selectInstrutor(sqlQuery, res);
+// 	}
+// });
 
 router.get('/aulas', (req, res) => {
 	// quando não é passado um parametro, seleciona todas as aulas
@@ -133,18 +130,18 @@ router.get('/relatorio', (req, res) => {
 
 
 // Métodos POST
-router.post('/instrutores', (req, res) => {
-	const nome = req.body.nome;
-	const identidade = req.body.identidade;
-	const cpf = req.body.cpf;
-	const atividade = req.body.atividade;
-	const sqlQuery = "INSERT INTO instrutor " +
-					 "(id_instrutor, nome, identidade, cpf, atividade) VALUES " +
-					 `(DEFAULT, '${nome}', '${identidade}', '${cpf}', '${atividade}');`;
-	console.log(sqlQuery);
+// router.post('/instrutores', (req, res) => {
+// 	const nome = req.body.nome;
+// 	const identidade = req.body.identidade;
+// 	const cpf = req.body.cpf;
+// 	const atividade = req.body.atividade;
+// 	const sqlQuery = "INSERT INTO instrutor " +
+// 					 "(id_instrutor, nome, identidade, cpf, atividade) VALUES " +
+// 					 `(DEFAULT, '${nome}', '${identidade}', '${cpf}', '${atividade}');`;
+// 	console.log(sqlQuery);
 
-	execGenericSQLQuery(sqlQuery, res);
-});
+// 	execGenericSQLQuery(sqlQuery, res);
+// });
 
 router.post('/aulas', (req, res) => {
 	const nomeAula = req.body.nome;
@@ -172,21 +169,21 @@ router.post('/aulas', (req, res) => {
 
 
 // Métodos PUT
-router.put('/instrutores/:id', (req, res) => {
-	const nome = req.body.nome;
-	const identidade = req.body.identidade;
-	const cpf = req.body.cpf;
-	const atividade = req.body.atividade;
+// router.put('/instrutores/:id', (req, res) => {
+// 	const nome = req.body.nome;
+// 	const identidade = req.body.identidade;
+// 	const cpf = req.body.cpf;
+// 	const atividade = req.body.atividade;
 
-	const sqlQuery = "UPDATE instrutor SET " +
-					 `nome = '${nome}', identidade = '${identidade}', ` +
-					 `cpf = '${cpf}', atividade = '${atividade}' ` +
-					 "WHERE id_instrutor = " + parseInt(req.params.id) + " ;";
-	console.log(req.body);
-	console.log(sqlQuery);
+// 	const sqlQuery = "UPDATE instrutor SET " +
+// 					 `nome = '${nome}', identidade = '${identidade}', ` +
+// 					 `cpf = '${cpf}', atividade = '${atividade}' ` +
+// 					 "WHERE id_instrutor = " + parseInt(req.params.id) + " ;";
+// 	console.log(req.body);
+// 	console.log(sqlQuery);
 
-	execGenericSQLQuery(sqlQuery, res);
-});
+// 	execGenericSQLQuery(sqlQuery, res);
+// });
 
 router.put('/aulas/:id', (req, res) => {
 	const nomeAula = req.body.nome;
@@ -214,12 +211,12 @@ router.put('/aulas/:id', (req, res) => {
 });
 
 // Métodos DELETE
-router.delete('/instrutores/:id', (req, res) => {
-	const sqlQuery = "DELETE FROM instrutor WHERE id_instrutor = " + parseInt(req.params.id) + " ;";
-	console.log(sqlQuery);
+// router.delete('/instrutores/:id', (req, res) => {
+// 	const sqlQuery = "DELETE FROM instrutor WHERE id_instrutor = " + parseInt(req.params.id) + " ;";
+// 	console.log(sqlQuery);
 
-	execGenericSQLQuery(sqlQuery, res);
-});
+// 	execGenericSQLQuery(sqlQuery, res);
+// });
 
 router.delete('/aulas/:id', (req, res) => {
 	const sqlQuery = "DELETE FROM aula WHERE id_aula = " + parseInt(req.params.id) + " ;";
@@ -233,6 +230,8 @@ app.use('/', router); // requisicoes que chegam na raiz sao mandadas para o rout
 //inicia o servidor
 app.listen(port);
 console.log('API funcionando!');
+
+InstutorRoute(app);
 
 
 
@@ -327,18 +326,18 @@ function selectAula(sqlQuery, res) {
 }
 
 
-function selectInstrutor(sqlQuery, res) {
-	const connection = mysql.createConnection(dbConection);
+// function selectInstrutor(sqlQuery, res) {
+// 	const connection = mysql.createConnection(dbConection);
 
-	connection.query(sqlQuery, function(error, results, fields) {
-		if (error)
-			res.json(error);
-		else
-			res.json(results);
-		connection.end();
-		console.log('Busca por instrutor executada');
-	});
-}
+// 	connection.query(sqlQuery, function(error, results, fields) {
+// 		if (error)
+// 			res.json(error);
+// 		else
+// 			res.json(results);
+// 		connection.end();
+// 		console.log('Busca por instrutor executada');
+// 	});
+// }
 
 
 function selectRelatorio(sortParam, res) {
