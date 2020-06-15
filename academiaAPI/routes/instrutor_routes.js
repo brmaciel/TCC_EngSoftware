@@ -33,6 +33,7 @@ function InstrutorRoute(app) {
     app.route('/instrutores/:nomeOrId?')
         .get((req, res) => {
             if (req.query.atividade) {
+                // Busca por instrutores que dao aulas em grupo
                 console.log(req.query);
                 const atividade = req.query.atividade;
         
